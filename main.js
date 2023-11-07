@@ -1,0 +1,1 @@
+(()=>{"use strict";const s={type:"destroyer",length:3,hits:0,hit:function(){this.hits++,console.log(`This ship has been hit ${this.hits} times`)},isSunk:function(){return this.hits>=this.length}};function i(){s.hit(),s.isSunk()?console.log("The ship has been sunk!"):console.log("The ship is still standing!")}i(),i(),i()})();
