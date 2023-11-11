@@ -10,14 +10,15 @@ function createGameboard() {
         board: board,
         ships: [],
         placeShip: function(type, y, x, orientation) { // type of ship, coordinates of the starting point of ship placement, and then vertical or horizontal orientation
+            console.log(`Attempting to place ${type} at (${y}, ${x}) with orientation ${orientation}`);
             const newShip = createShip(type);
             let ycoord = y;
             let xcoord = x;
 
-            // Check to make sure there isn't already a ship in the relevant cells
+            // Check to make sure there the chosen coords and orientation are a valid placement
             if(!this.checkCells(ycoord, xcoord, newShip.length, orientation)) {
                 console.log("There's already a ship here!");
-                return;
+                return false; // Let whoever called this function know that it failed
             }
 
             // Place the ship at the relevant coordinates
@@ -31,6 +32,7 @@ function createGameboard() {
             }
             // Add the ship to the list of placed ships on this board
             this.ships.push(newShip);
+            return true; // Let whoever called this function know that it succeeded
         },
         recieveAttack: function(ycoord, xcoord) {
             const ship = this.board[ycoord][xcoord].ship;
@@ -53,7 +55,7 @@ function createGameboard() {
 
             // Traverse the relevant coordinates and make sure they are empty
             for(let i = 0; i < length; i++) {
-                if (this.board[ycoord][xcoord].ship) {
+                if (ycoord >= 10 || xcoord >= 10 || this.board[ycoord][xcoord].ship) {
                     return false;
                 }
                 if(orientation == 'vertical') {
