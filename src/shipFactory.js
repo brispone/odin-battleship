@@ -1,4 +1,5 @@
 function createShip(type) {
+    
     let length;
     switch(type) {
         case 'carrier':
@@ -9,10 +10,13 @@ function createShip(type) {
             break;
         case 'destroyer':
             length = 3;
+            break;
         case 'submarine':
             length = 3;
+            break;
         case 'patrol boat':
             length = 2;
+            break;
         default:
             return;
     }
