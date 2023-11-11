@@ -20,14 +20,26 @@ function createGameboard() {
 
     return {
         board: board,
-        placeShip: function(type, xcoord, ycoord) {
+        placeShip: function(type, y, x, orientation) { // type of ship, coordinates of the starting point of ship placement, and then vertical or horizontal orientation
             const newShip = createShip(type);
+            let ycoord = y;
+            let xcoord = x;
             this.board[xcoord][ycoord] = newShip;
+
+            for(let i = 0; i < newShip.length; i++) {
+                this.board[ycoord][xcoord] = newShip;
+                if(orientation == "vertical") {
+                    ycoord++;
+                } else {
+                    xcoord++;
+                }
+            }
+
         },
-        recieveAttack: function(xcoord, ycoord) {
-            const positionContents = this.board[xcoord][ycoord];
+        recieveAttack: function(ycoord, xcoord) {
+            const positionContents = this.board[ycoord][xcoord];
             if (positionContents) {
-                console.log(`${positionContents.type} was there!`);
+                positionContents.hit();
             } else console.log('Missed!');
         }
     }
