@@ -2,28 +2,13 @@ import { createShip } from "./shipFactory";
 
 function createGameboard() {
 
-    // Create a 2-dimensional array for the gameboard - each cell initalizaed as null to signify that it is empty
-    // Outer arrays are the vertical, inner is horizontal
-    // ie: Position A1 would be board[0][0]
-    /*const board = [
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null],
-        [null, null, null, null, null, null, null, null, null, null]
-    ]*/
-
     // Initialize the gameboard, 2-dimensional array that can be accessed like board[column][row] - status should be empty, miss, or hit
     const initializeEmptyCell = () => ({ ship: null, status: 'empty' });
     const board = Array.from({ length: 10 }, () => Array.from({ length: 10 }, initializeEmptyCell));
 
     return {
         board: board,
+        ships: [],
         placeShip: function(type, y, x, orientation) { // type of ship, coordinates of the starting point of ship placement, and then vertical or horizontal orientation
             const newShip = createShip(type);
             let ycoord = y;
@@ -44,16 +29,23 @@ function createGameboard() {
                     xcoord++;
                 }
             }
-
+            // Add the ship to the list of placed ships on this board
+            this.ships.push(newShip);
         },
         recieveAttack: function(ycoord, xcoord) {
             const ship = this.board[ycoord][xcoord].ship;
             if (ship) {
                 ship.hit();
+                this.board[ycoord][xcoord].status = 'hit'
             } else {
                 console.log("Missed!");
+                this.board[ycoord][xcoord].status = 'miss'
 
             }
+        },
+        allSunk: function() {
+            // check all of the ships attached to this gameboard, if any of them return as sunk, return true - otherwise it will return false
+            return this.ships.every((ship) => ship.isSunk());
         }
     }
 }
@@ -68,7 +60,7 @@ function checkCells(gameboard, y, x, length, orientation) {
         if (gameboard[ycoord][xcoord].ship) {
             return false;
         }
-        if(orientation == "vertical") {
+        if(orientation == 'vertical') {
             ycoord++;
         } else {
             xcoord++;
