@@ -25,6 +25,7 @@ function createGameboard() {
             let ycoord = y;
             let xcoord = x;
 
+            // Check to make sure there isn't already a ship in the relevant cells
             if(!checkCells(this.board, ycoord, xcoord, newShip.length, orientation)) {
                 console.log("There's already a ship here!");
                 return;
