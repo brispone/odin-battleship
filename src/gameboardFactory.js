@@ -24,8 +24,13 @@ function createGameboard() {
             const newShip = createShip(type);
             let ycoord = y;
             let xcoord = x;
-            this.board[xcoord][ycoord] = newShip;
 
+            if(!checkCells(this.board, ycoord, xcoord, newShip.length, orientation)) {
+                console.log("There's already a ship here!");
+                return;
+            }
+
+            // Place the ship at the relevant coordinates
             for(let i = 0; i < newShip.length; i++) {
                 this.board[ycoord][xcoord] = newShip;
                 if(orientation == "vertical") {
@@ -37,12 +42,31 @@ function createGameboard() {
 
         },
         recieveAttack: function(ycoord, xcoord) {
-            const positionContents = this.board[ycoord][xcoord];
-            if (positionContents) {
-                positionContents.hit();
+            const positionContent = this.board[ycoord][xcoord];
+            if (positionContent) {
+                positionContent.hit();
             } else console.log('Missed!');
         }
     }
+}
+
+function checkCells(gameboard, y, x, length, orientation) {
+
+    let ycoord = y;
+    let xcoord = x;
+
+    // Traverse the relevant coordinates and make sure they are empty
+    for(let i = 0; i < length; i++) {
+        if (gameboard[ycoord][xcoord]) {
+            return false;
+        }
+        if(orientation == "vertical") {
+            ycoord++;
+        } else {
+            xcoord++;
+        }
+    }
+    return true;
 }
 
 export { createGameboard };
