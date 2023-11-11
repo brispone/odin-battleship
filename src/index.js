@@ -1,7 +1,3 @@
 import { createShip } from "./shipFactory";
+import { createGameboard } from "./gameboardFactory";
 
-const ship = createShip('patrol boat');
-
-console.log(ship);
-ship.hit();
-ship.isSunk();
