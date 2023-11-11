@@ -15,7 +15,7 @@ function createGameboard() {
             let xcoord = x;
 
             // Check to make sure there isn't already a ship in the relevant cells
-            if(!checkCells(this.board, ycoord, xcoord, newShip.length, orientation)) {
+            if(!this.checkCells(ycoord, xcoord, newShip.length, orientation)) {
                 console.log("There's already a ship here!");
                 return;
             }
@@ -46,27 +46,25 @@ function createGameboard() {
         allSunk: function() {
             // check all of the ships attached to this gameboard, if any of them return as sunk, return true - otherwise it will return false
             return this.ships.every((ship) => ship.isSunk());
+        },
+        checkCells: function(y, x, length, orientation) {
+            let ycoord = y;
+            let xcoord = x;
+
+            // Traverse the relevant coordinates and make sure they are empty
+            for(let i = 0; i < length; i++) {
+                if (this.board[ycoord][xcoord].ship) {
+                    return false;
+                }
+                if(orientation == 'vertical') {
+                    ycoord++;
+                } else {
+                    xcoord++;
+                }
+            }
+            return true;
         }
     }
-}
-
-function checkCells(gameboard, y, x, length, orientation) {
-
-    let ycoord = y;
-    let xcoord = x;
-
-    // Traverse the relevant coordinates and make sure they are empty
-    for(let i = 0; i < length; i++) {
-        if (gameboard[ycoord][xcoord].ship) {
-            return false;
-        }
-        if(orientation == 'vertical') {
-            ycoord++;
-        } else {
-            xcoord++;
-        }
-    }
-    return true;
 }
 
 export { createGameboard };
