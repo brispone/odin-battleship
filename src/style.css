@@ -29,6 +29,10 @@ body {
     cursor: pointer;
 }
 
+.cell:hover {
+    border: 1px dashed slategray;
+}
+
 /* Empty cell style */
 .empty {
     background-color: #fff;

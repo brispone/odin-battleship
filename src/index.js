@@ -40,10 +40,11 @@ function placeShipsRandomly(player) {
 placeShipsRandomly(Player);
 placeShipsRandomly(Computer);
 
-renderPlayerBoard(Player.gameboard.board);
-renderComputerBoard(Computer.gameboard.board);
+renderPlayerBoard();
+renderComputerBoard();
 
 function isGameOver() {
     return Player.gameboard.allSunk() || Computer.gameboard.allSunk();
 }
 
+export { Player, Computer };
