@@ -18,6 +18,11 @@ function isGameOver() {
 function endGame() {
     Player.isTurn = false;
     Computer.isTurn = false;
+    if(Computer.gameboard.allSunk()) {
+        alert("You win!");
+    } else {
+        alert("You lose!");
+    }
 }
 
 function beginGame() {
