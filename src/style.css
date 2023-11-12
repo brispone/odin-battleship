@@ -1,0 +1,54 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-boards {
+    display: flex;
+}
+
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-gap: 4px;
+    margin-right: 50px;
+}
+
+.cell {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Empty cell style */
+.empty {
+    background-color: #fff;
+}
+
+/* Cell with a ship style */
+.ship {
+    background-color: #555; /* Dark gray */
+    color: #fff; /* White text */
+}
+
+/* Cell with a miss style */
+.miss {
+    background-color: #3498db; /* Blue */
+    color: #fff; /* White text */
+}
+
+/* Cell with a hit style */
+.hit {
+    background-color: #555; /* Dark gray */
+    color: #fff; /* White text */
+    outline: 2px solid #e74c3c; /* Red outline */
+}

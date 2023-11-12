@@ -1,5 +1,7 @@
+import './style.css';
 import { createShip } from "./shipFactory";
 import { createGameboard } from "./gameboardFactory";
+import { renderComputerBoard, renderPlayerBoard } from './domFunctions';
 
 const Player = {
     gameboard: createGameboard()
@@ -9,42 +11,39 @@ const Computer = {
     gameboard: createGameboard()
 }
 
-// Place ships randomly
-const shipsArray = [
-    'carrier',
-    'battleship',
-    'destroyer',
-    'submarine',
-    'patrol boat'
-]
+function placeShipsRandomly(player) {
+    // Place ships randomly
+    const shipsArray = [
+        'carrier',
+        'battleship',
+        'destroyer',
+        'submarine',
+        'patrol boat'
+    ]
 
-shipsArray.forEach((type) => {
-    let placed = false;
-    const getRandomCoord = () => Math.floor(Math.random() * 10);
+    shipsArray.forEach((type) => {
+        let placed = false;
+        const getRandomCoord = () => Math.floor(Math.random() * 10);
+    
+        while(!placed) {
+            const y = getRandomCoord();
+            const x = getRandomCoord();
+            const orientation = Math.random() < 0.5 ? 'horizontal' : 'vertical';
+    
+            // Try to place the ship, and if successful, set placed to true to exit the loop
+            placed = player.gameboard.placeShip(type, y, x, orientation);
+        }
+    });
+    
+}
 
-    while(!placed) {
-        const y = getRandomCoord();
-        const x = getRandomCoord();
-        const orientation = Math.random() < 0.5 ? 'horizontal' : 'vertical';
+placeShipsRandomly(Player);
+placeShipsRandomly(Computer);
 
-        // Try to place the ship, and if successful, set placed to true to exit the loop
-        placed = Player.gameboard.placeShip(type, y, x, orientation);
-    }
-});
+renderPlayerBoard(Player.gameboard.board);
+renderComputerBoard(Computer.gameboard.board);
 
-shipsArray.forEach((type) => {
-    let placed = false;
-    const getRandomCoord = () => Math.floor(Math.random() * 10);
+function isGameOver() {
+    return Player.gameboard.allSunk() || Computer.gameboard.allSunk();
+}
 
-    while(!placed) {
-        const y = getRandomCoord();
-        const x = getRandomCoord();
-        const orientation = Math.random() < 0.5 ? 'horizontal' : 'vertical';
-
-        // Try to place the ship, and if successful, set placed to true to exit the loop
-        placed = Computer.gameboard.placeShip(type, y, x, orientation);
-    }
-});
-
-console.log(Player.gameboard.board);
-console.log(Computer.gameboard.board);
