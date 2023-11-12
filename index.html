@@ -6,13 +6,84 @@
     <title>Battleship</title>
 </head>
 <body>
+    <div class="game-space">
+        <div class="btn-container">
+            <button id="new-game-button">New Game</button>
+        </div>
 
-    <div class="game-boards">
-        <div class="game-board player-board" id="player-board"></div>
-        <div class="game-board computer-board" id="computer-board"></div>
+        <div class="game-boards">
+            <div class="game-pieces" id="player-pieces">
+                <p>Carrier</p>
+                <div class="game-piece player-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+                <p>Battleship</p>
+                <div class="game-piece player-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+                <p>Destroyer</p>
+                <div class="game-piece player-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+                <p>Submarine</p>
+                <div class="game-piece player-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+                <p>Patrol Boat</p>
+                <div class="game-piece player-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+            </div>
+            <div class="game-board player-board" id="player-board"></div>
+            <div class="game-board computer-board" id="computer-board"></div>
+            <div class="game-pieces" id="computer-pieces">
+                <p>Carrier</p>
+                <div class="game-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+                <p>Battleship</p>
+                <div class="game-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+                <p>Destroyer</p>
+                <div class="game-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+                <p>Submarine</p>
+                <div class="game-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+                <p>Patrol Boat</p>
+                <div class="game-piece">
+                    <div class="dummy-cell ship"></div>
+                    <div class="dummy-cell ship"></div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <button id="new-game-button">New Game</button>
 
     <script src="main.js"></script>
 </body>
