@@ -4,11 +4,13 @@ import { createGameboard } from "./gameboardFactory";
 import { renderComputerBoard, renderPlayerBoard } from './domFunctions';
 
 const Player = {
-    gameboard: createGameboard()
+    gameboard: createGameboard(),
+    isTurn: false
 }
 
 const Computer = {
-    gameboard: createGameboard()
+    gameboard: createGameboard(),
+    isTurn: false
 }
 
 function placeShipsRandomly(player) {
@@ -36,15 +38,11 @@ function placeShipsRandomly(player) {
     });
     
 }
-
+/*
 placeShipsRandomly(Player);
 placeShipsRandomly(Computer);
 
 renderPlayerBoard();
-renderComputerBoard();
-
-function isGameOver() {
-    return Player.gameboard.allSunk() || Computer.gameboard.allSunk();
-}
+renderComputerBoard();*/
 
 export { Player, Computer };

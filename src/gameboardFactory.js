@@ -35,15 +35,19 @@ function createGameboard() {
             return true; // Let whoever called this function know that it succeeded
         },
         recieveAttack: function(ycoord, xcoord) {
+
+            if (this.board[ycoord][xcoord].status !== 'empty') {
+                return false; // Cell has already received an attack, so do nothing - return false so that whoever called this function knows that it failed
+            }
             const ship = this.board[ycoord][xcoord].ship;
             if (ship) {
                 ship.hit();
-                this.board[ycoord][xcoord].status = 'hit'
+                this.board[ycoord][xcoord].status = 'hit';
             } else {
                 console.log("Missed!");
-                this.board[ycoord][xcoord].status = 'miss'
-
+                this.board[ycoord][xcoord].status = 'miss';
             }
+            return true; // let whoever called this function know that it succeeded
         },
         allSunk: function() {
             // check all of the ships attached to this gameboard, if any of them return as sunk, return true - otherwise it will return false

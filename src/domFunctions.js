@@ -1,5 +1,4 @@
-import { playerTakeTurn } from "./gameLogic";
-import { Player, Computer } from "./index.js";
+import { handleCellClick, Player, Computer } from "./gameLogic";
 
 function renderPlayerBoard() {
     const board = Player.gameboard.board;
@@ -45,7 +44,7 @@ function renderComputerBoard() {
             if(cellInfo.status === 'empty') {
                 cell.classList.add('empty');
                 cell.addEventListener('click', () => {
-                    playerTakeTurn(row, column);
+                    handleCellClick(row, column);
                 });
             } else if(cellInfo.status === 'miss') {
                 cell.classList.add('miss');
