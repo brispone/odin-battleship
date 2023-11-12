@@ -14,7 +14,7 @@ function createShip(type) {
         case 'submarine':
             length = 3;
             break;
-        case 'patrol boat':
+        case 'patrol':
             length = 2;
             break;
         default:

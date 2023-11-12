@@ -2,12 +2,12 @@ import { renderPlayerBoard, renderComputerBoard } from "./domFunctions";
 import { createGameboard } from "./gameboardFactory.js";
 
 const Player = {
-    gameboard: createGameboard(),
+    gameboard: createGameboard('player'),
     isTurn: false
 }
 
 const Computer = {
-    gameboard: createGameboard(),
+    gameboard: createGameboard('computer'),
     isTurn: false
 }
 
@@ -28,8 +28,8 @@ function endGame() {
 function beginGame() {
     Player.isTurn = true;
     Computer.isTurn = false;
-    Player.gameboard = createGameboard();
-    Computer.gameboard = createGameboard();
+    Player.gameboard = createGameboard('player');
+    Computer.gameboard = createGameboard('computer');
     placeShipsRandomly(Player);
     placeShipsRandomly(Computer);
     renderPlayerBoard();
@@ -89,7 +89,7 @@ function placeShipsRandomly(player) {
         'battleship',
         'destroyer',
         'submarine',
-        'patrol boat'
+        'patrol'
     ]
 
     shipsArray.forEach((type) => {

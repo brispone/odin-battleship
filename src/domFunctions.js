@@ -58,4 +58,12 @@ function renderComputerBoard() {
     }
 };
 
-export { renderPlayerBoard, renderComputerBoard };
+function updateGamePieces(player, shipType) {
+    const container = document.getElementById(`${player}-pieces`) // Set the container to either the player's or the computer's pieces, depending
+    const shipCells = container.querySelector(`.${shipType}`).querySelectorAll('.dummy-cell'); // put all the cells of ship piece into an array
+    shipCells.forEach((cell) => { // loop through the array and add the hit styling to them to indicate the ship has been sunk
+        cell.classList.add('hit');
+    });
+}
+
+export { renderPlayerBoard, renderComputerBoard, updateGamePieces };

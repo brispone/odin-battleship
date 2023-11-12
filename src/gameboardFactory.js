@@ -1,12 +1,14 @@
 import { createShip } from "./shipFactory";
+import { updateGamePieces } from "./domFunctions";
 
-function createGameboard() {
+function createGameboard(owner) {
 
     // Initialize the gameboard, 2-dimensional array that can be accessed like board[column][row] - status should be empty, miss, or hit
     const initializeEmptyCell = () => ({ ship: null, status: 'empty' });
     const board = Array.from({ length: 10 }, () => Array.from({ length: 10 }, initializeEmptyCell));
 
     return {
+        owner: owner,
         board: board,
         ships: [],
         placeShip: function(type, y, x, orientation) { // type of ship, coordinates of the starting point of ship placement, and then vertical or horizontal orientation
@@ -43,6 +45,12 @@ function createGameboard() {
             if (ship) {
                 ship.hit();
                 this.board[ycoord][xcoord].status = 'hit';
+
+                // Check if the ship was sunk, if so update game pieces to the side of the gameboards so the player knows what they sunk and what is remaining
+                if(ship.isSunk()) {
+                    updateGamePieces(this.owner, ship.type);
+                }
+
             } else {
                 console.log("Missed!");
                 this.board[ycoord][xcoord].status = 'miss';

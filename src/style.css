@@ -31,6 +31,10 @@ body {
     align-items: flex-end;
 }
 
+.red {
+    color: red;
+}
+
 .game-pieces p {
     padding: 0;
     margin-bottom: 8px;
