@@ -66,4 +66,25 @@ function updateGamePieces(player, shipType) {
     });
 }
 
+// Event listeners for dragging game pieces
+const playerPieces = document.querySelectorAll('.game-piece.player-piece');
+
+playerPieces.forEach((piece) => {
+    piece.addEventListener('dragstart', handleDragStart);
+    piece.addEventListener('dragover', handleDragOver);
+    piece.addEventListener('drop', handleDrop);
+});
+
+function handleDragStart() {
+
+}
+
+function handleDragOver() {
+
+}
+
+function handleDrop() {
+    
+}
+
 export { renderPlayerBoard, renderComputerBoard, updateGamePieces };
