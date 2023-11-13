@@ -66,25 +66,12 @@ function updateGamePieces(player, shipType) {
     });
 }
 
-// Event listeners for dragging game pieces
-const playerPieces = document.querySelectorAll('.game-piece.player-piece');
+function resetGamePieces() {
+    const ships = document.querySelectorAll('.dummy-cell');
 
-playerPieces.forEach((piece) => {
-    piece.addEventListener('dragstart', handleDragStart);
-    piece.addEventListener('dragover', handleDragOver);
-    piece.addEventListener('drop', handleDrop);
-});
-
-function handleDragStart() {
-
+    ships.forEach((cell) => {
+        cell.classList.remove('hit');
+    });
 }
 
-function handleDragOver() {
-
-}
-
-function handleDrop() {
-    
-}
-
-export { renderPlayerBoard, renderComputerBoard, updateGamePieces };
+export { renderPlayerBoard, renderComputerBoard, updateGamePieces, resetGamePieces };

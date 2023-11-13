@@ -1,4 +1,4 @@
-import { renderPlayerBoard, renderComputerBoard } from "./domFunctions";
+import { renderPlayerBoard, renderComputerBoard, resetGamePieces } from "./domFunctions";
 import { createGameboard } from "./gameboardFactory.js";
 
 const Player = {
@@ -34,6 +34,7 @@ function beginGame() {
     placeShipsRandomly(Computer);
     renderPlayerBoard();
     renderComputerBoard();
+    resetGamePieces();
 }
 
 function handleCellClick(y,x) {
