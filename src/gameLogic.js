@@ -104,6 +104,12 @@ function advancePlacement() { // Simple switch logic to advance which ship the p
 }
 
 function computerTakeTurn() {
+
+    if(!Computer.isTurn) {
+        return; // don't do anything if it's not the computer's turn - can be relevant since this function is called on a timeout
+                // sometimes the timeout might start, and then a player will restart the game and then this function calls after the reset and causes problems
+    }
+
     let attacked = false;
         const getRandomCoord = () => Math.floor(Math.random() * 10);
     
@@ -118,7 +124,6 @@ function computerTakeTurn() {
 
         // Check for game over state
         if (isGameOver()) {
-            alert("the game is over");
             endGame();
         } else {
             Player.isTurn = true;
