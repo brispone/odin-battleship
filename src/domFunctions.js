@@ -52,6 +52,7 @@ function renderComputerBoard() {
         for(let column = 0; column < 10; column++) { // inner loop to traverse each column on each row
             const cell = document.createElement('div');
             cell.classList.add('cell');
+            cell.classList.add('computer-cell');
 
             const cellInfo = board[row][column];
 
