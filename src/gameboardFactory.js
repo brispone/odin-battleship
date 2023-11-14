@@ -74,7 +74,7 @@ function createGameboard(owner) {
             let ycoord = y;
             let xcoord = x;
 
-            // Traverse the relevant coordinates and make sure they are empty
+            // Traverse the relevant coordinates and make sure they don't go outside of the gameboard or there isn't a ship already there
             for(let i = 0; i < length; i++) {
                 if (ycoord >= 10 || xcoord >= 10 || this.board[ycoord][xcoord].ship) {
                     return false;

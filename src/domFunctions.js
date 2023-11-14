@@ -1,4 +1,5 @@
 import { handleCellClick, handlePlayerCellClick, Player, Computer } from "./gameLogic";
+import { shipLength } from "./shipFactory";
 
 function renderPlayerBoard() {
     const board = Player.gameboard.board;
@@ -18,6 +19,14 @@ function renderPlayerBoard() {
                 cell.classList.add('empty');
                 cell.addEventListener('click', () => {
                     handlePlayerCellClick(row, column);
+                });
+                cell.addEventListener('mouseover', () => {
+                    if(Player.currentlyPlacing) {
+                        showPlacementPreview(cell, row, column);
+                    }
+                });
+                cell.addEventListener('mouseout', () => {
+                    removePlacementPreview(cell);
                 });
             } else if(cellInfo.status === 'miss') {
                 cell.classList.add('miss');
@@ -75,6 +84,17 @@ function resetGamePieces() {
     ships.forEach((cell) => {
         cell.classList.remove('hit');
     });
+}
+
+function showPlacementPreview(cell, y,x) {
+    if(Player.gameboard.checkCells(y, x, shipLength(Player.currentlyPlacing.ship), Player.currentlyPlacing.orientation)) {
+        cell.classList.add('placement-preview-valid');
+    } else cell.classList.add('placement-preview-invalid');
+}
+
+function removePlacementPreview(cell) {
+    cell.classList.remove('placement-preview-valid');
+    cell.classList.remove('placement-preview-invalid');
 }
 
 function setMessage(message) {

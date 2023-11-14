@@ -31,10 +31,6 @@ body {
     align-items: flex-end;
 }
 
-.red {
-    color: red;
-}
-
 .game-pieces p {
     padding: 0;
     margin-bottom: 8px;
@@ -117,4 +113,12 @@ body {
     background-color: #f1f1f1;
     margin-top: 20px;
     border: 1px solid #ccc;
+}
+
+.placement-preview-valid {
+    background-color: lightgreen;
+}
+
+.placement-preview-invalid {
+    background-color: lightcoral;
 }

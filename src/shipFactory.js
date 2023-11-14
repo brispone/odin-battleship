@@ -1,25 +1,6 @@
 function createShip(type) {
     
-    let length;
-    switch(type) {
-        case 'carrier':
-            length = 5;
-            break;
-        case 'battleship':
-            length = 4;
-            break;
-        case 'destroyer':
-            length = 3;
-            break;
-        case 'submarine':
-            length = 3;
-            break;
-        case 'patrol':
-            length = 2;
-            break;
-        default:
-            return;
-    }
+    const length = shipLength(type); // get the ship's length according to its type
 
     return {
         type: type,
@@ -37,4 +18,27 @@ function createShip(type) {
     };
 }
 
-export { createShip };
+// Function that will return the length of a ship based on what type of ship it is
+function shipLength(type) {
+    switch(type) {
+        case 'carrier':
+            return 5;
+            break;
+        case 'battleship':
+            return 4;
+            break;
+        case 'destroyer':
+            return 3;
+            break;
+        case 'submarine':
+            return 3;
+            break;
+        case 'patrol':
+            return 2;
+            break;
+        default:
+            return;
+    }
+}
+
+export { createShip, shipLength };
