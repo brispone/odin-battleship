@@ -82,4 +82,17 @@ function setMessage(message) {
     messageText.innerText = message;
 }
 
-export { renderPlayerBoard, renderComputerBoard, updateGamePieces, resetGamePieces, setMessage };
+function triggerHitMessage() {
+    const messages = [
+        `That's a hit!`,
+        'Nice shot!',
+        'Direct hit!',
+        'Bullseye!'
+    ];
+
+    const randomNumber = Math.floor(Math.random() * 4);
+
+    setMessage(messages[randomNumber]);
+}
+
+export { renderPlayerBoard, renderComputerBoard, updateGamePieces, resetGamePieces, setMessage, triggerHitMessage };

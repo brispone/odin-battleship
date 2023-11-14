@@ -1,5 +1,6 @@
 import { createShip } from "./shipFactory";
-import { updateGamePieces } from "./domFunctions";
+import { updateGamePieces, setMessage, triggerHitMessage } from "./domFunctions";
+import { Player } from "./gameLogic";
 
 function createGameboard(owner) {
 
@@ -44,15 +45,23 @@ function createGameboard(owner) {
             const ship = this.board[ycoord][xcoord].ship;
             if (ship) {
                 ship.hit();
+                if(Player.isTurn) {
+                    triggerHitMessage();
+                }
                 this.board[ycoord][xcoord].status = 'hit';
 
                 // Check if the ship was sunk, if so update game pieces to the side of the gameboards so the player knows what they sunk and what is remaining
                 if(ship.isSunk()) {
+                    if(Player.isTurn) {
+                        setMessage(`You sunk my ${ship.type}!`);
+                    }
                     updateGamePieces(this.owner, ship.type);
                 }
 
             } else {
-                console.log("Missed!");
+                if(Player.isTurn) {
+                    setMessage('Miss!');
+                }
                 this.board[ycoord][xcoord].status = 'miss';
             }
             return true; // let whoever called this function know that it succeeded

@@ -23,9 +23,9 @@ function endGame() {
     Player.isTurn = false;
     Computer.isTurn = false;
     if(Computer.gameboard.allSunk()) {
-        alert("You win!");
+        setMessage('You win!');
     } else {
-        alert("You lose!");
+        setMessage("You lose!");
     }
 }
 
@@ -39,7 +39,7 @@ function beginGame() {
     renderPlayerBoard();
     renderComputerBoard();
     resetGamePieces();
-    setMessage('Place your carrier on the board. You can press the R key to switch between horizontal and vertical placement.');
+    setMessage('Place your CARRIER on the board.\n\nYou can press the R key to switch between horizontal and vertical placement.');
 }
 
 function handleCellClick(y,x) {
@@ -54,7 +54,6 @@ function handleCellClick(y,x) {
 
     // Check for game over state
     if (isGameOver()) {
-        alert("the game is over");
         endGame();
     } else { 
         Player.isTurn = false;
@@ -80,26 +79,26 @@ function advancePlacement() { // Simple switch logic to advance which ship the p
     switch(Player.currentlyPlacing.ship) {
         case 'carrier':
             Player.currentlyPlacing.ship = 'battleship';
-            setMessage('Place your battleship on the board. You can press the R key to switch between horizontal and vertical placement.');
+            setMessage('Place your BATTLESHIP on the board.\n\nYou can press the R key to switch between horizontal and vertical placement.');
             break;
         case 'battleship':
             Player.currentlyPlacing.ship = 'destroyer';
-            setMessage('Place your destroyer on the board. You can press the R key to switch between horizontal and vertical placement.');
+            setMessage('Place your DESTROYER on the board.\n\nYou can press the R key to switch between horizontal and vertical placement.');
             break;
 
         case 'destroyer':
             Player.currentlyPlacing.ship = 'submarine';
-            setMessage('Place your submarine on the board. You can press the R key to switch between horizontal and vertical placement.');
+            setMessage('Place your SUBMARINE on the board.\n\nYou can press the R key to switch between horizontal and vertical placement.');
             break;
         case 'submarine':
             Player.currentlyPlacing.ship = 'patrol';
-            setMessage('Place your patrol boat on the board. You can press the R key to switch between horizontal and vertical placement.');
+            setMessage('Place your PATROL BOAT on the board.\n\nYou can press the R key to switch between horizontal and vertical placement.');
             break;
         case 'patrol':
             Player.currentlyPlacing = false;
             Player.allShipsPlaced = true;
             Player.isTurn = true;
-            setMessage('Click a coordinate on the enemy board to fire at that location. Good luck!');
+            setMessage('You\'re all set! Click a coordinate on the enemy board to fire at that location. Good luck!');
             break;
     }
 }
