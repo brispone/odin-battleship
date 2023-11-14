@@ -102,7 +102,7 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
-
+/*
 .message-box {
     display: flex;
     justify-content: center;
@@ -114,6 +114,7 @@ body {
     margin-top: 20px;
     border: 1px solid #ccc;
 }
+*/
 
 .placement-preview-valid {
     background-color: lightgreen;
@@ -122,3 +123,24 @@ body {
 .placement-preview-invalid {
     background-color: lightcoral;
 }
+
+.message-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 25%;
+    height: 150px;
+    background-color: #1f1f1f; /* Dark background */
+    margin-top: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+    font-family: 'Courier New', monospace; /* Monospace font */
+    color: #00ff00; /* Green text */
+    letter-spacing: 2px; /* Spacing between letters */
+  }
+  
+  #message-text {
+    padding: 10px; /* Padding inside the box */
+  }

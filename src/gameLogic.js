@@ -160,6 +160,15 @@ function placeShipsRandomly(player) {
 // EVENT LISTENER FOR THE BEGIN GAME BUTTON
 
 document.getElementById('new-game-button').addEventListener('click', ()=> {
+
+    if(Player.isTurn || Computer.isTurn || Player.currentlyPlacing) {
+        const confirmed = window.confirm("Reset the current game?");
+
+        if(!confirmed) {
+            return;
+        }
+    }
+
     beginGame();
 });
 
