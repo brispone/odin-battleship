@@ -10,6 +10,8 @@ function renderPlayerBoard() {
         for(let column = 0; column < 10; column++) { // inner loop to traverse each column on each row
             const cell = document.createElement('div');
             cell.classList.add('cell');
+            cell.dataset.row = row;
+            cell.dataset.col = column;
 
             const cellInfo = board[row][column];
             if (cellInfo.ship) {
@@ -86,15 +88,29 @@ function resetGamePieces() {
     });
 }
 
-function showPlacementPreview(cell, y,x) {
-    if(Player.gameboard.checkCells(y, x, shipLength(Player.currentlyPlacing.ship), Player.currentlyPlacing.orientation)) {
-        cell.classList.add('placement-preview-valid');
+function showPlacementPreview(cell, y, x) {
+    const length = shipLength(Player.currentlyPlacing.ship);
+    const orientation = Player.currentlyPlacing.orientation;
+    let currentY = y;
+    let currentX = x;
+    if(Player.gameboard.checkCells(y, x, length, orientation)) {
+        //cell.classList.add('placement-preview-valid');
+        for(let i = 0; i < length; i++) {
+            const currentCell = document.querySelector(`[data-row="${currentY}"][data-col="${currentX}"]`);
+            currentCell.classList.add('placement-preview-valid');
+            if(orientation === 'horizontal') {
+                currentX++;
+            } else currentY++;
+        }
     } else cell.classList.add('placement-preview-invalid');
 }
 
 function removePlacementPreview(cell) {
-    cell.classList.remove('placement-preview-valid');
-    cell.classList.remove('placement-preview-invalid');
+    const allCells = document.querySelectorAll('.cell');
+    allCells.forEach(cell => {
+        cell.classList.remove('placement-preview-valid');
+        cell.classList.remove('placement-preview-invalid');
+    });
 }
 
 function setMessage(message) {
