@@ -12,7 +12,9 @@ const Player = {
 
 const Computer = {
     gameboard: createGameboard('computer'),
-    isTurn: false
+    isTurn: false,
+    lastHit: null,
+    prevLastHit: null
 }
 
 function isGameOver() {
@@ -110,16 +112,44 @@ function computerTakeTurn() {
                 // sometimes the timeout might start, and then a player will restart the game and then this function calls after the reset and causes problems
     }
 
-    let attacked = false;
-        const getRandomCoord = () => Math.floor(Math.random() * 10);
-    
-        while(!attacked) {
-            const y = getRandomCoord();
-            const x = getRandomCoord();
-    
-            // Try to attack the random location, and if successful, set attacked to true to exit the loop
-            attacked = Player.gameboard.recieveAttack(y, x);
+    const ships = Player.gameboard.ships;
+    let hitButNotSunk = false;
+    ships.forEach((ship) => {
+        if(ship.hits > 0 && !ship.isSunk()) {
+            hitButNotSunk = true;
         }
+    });
+    let attacked = false;
+
+    if(hitButNotSunk) {
+        const adjacentCoords = getAdjacentCoords(Computer.lastHit);
+
+        while(!attacked && adjacentCoords.length > 0) {
+            const randomIndex = Math.floor(Math.random() * adjacentCoords.length);
+            const attackCoordinate = adjacentCoords[randomIndex];
+
+            attacked = Player.gameboard.recieveAttack(attackCoordinate.y, attackCoordinate.x);
+            adjacentCoords.splice(randomIndex, 1);
+        }
+        if(!attacked && Computer.prevLastHit) {
+            const adjacentCoords = getAdjacentCoords(Computer.prevLastHit);
+
+            while(!attacked && adjacentCoords.length > 0) {
+                const randomIndex = Math.floor(Math.random() * adjacentCoords.length);
+                const attackCoordinate = adjacentCoords[randomIndex];
+
+                attacked = Player.gameboard.recieveAttack(attackCoordinate.y, attackCoordinate.x);
+                adjacentCoords.splice(randomIndex, 1);
+            }
+        }
+        if(!attacked) {
+            attackRandomly();
+        }
+
+    } else {
+
+        attackRandomly();
+    }
         renderPlayerBoard(); // Render updated gameboard after the attack is successful
 
         // Check for game over state
@@ -129,6 +159,19 @@ function computerTakeTurn() {
             Player.isTurn = true;
             Computer.isTurn = false;
         }
+}
+
+function attackRandomly() {
+    const getRandomCoord = () => Math.floor(Math.random() * 10);
+    let attacked = false;
+    
+    while(!attacked) {
+        const y = getRandomCoord();
+        const x = getRandomCoord();
+    
+        // Try to attack the random location, and if successful, set attacked to true to exit the loop
+        attacked = Player.gameboard.recieveAttack(y, x);
+    }
 }
 
 function placeShipsRandomly(player) {
@@ -155,6 +198,16 @@ function placeShipsRandomly(player) {
         }
     });
     
+}
+
+function getAdjacentCoords(coord) {
+    const { y, x } = coord;
+    return [
+        { y: y - 1, x },
+        { y: y + 1, x },
+        { y, x: x - 1 },
+        { y, x: x + 1 },
+    ].filter((c) => c.y >= 0 && c.y < 10 && c.x >= 0 && c.x < 10); // Remove invalid coordinates from the array
 }
 
 // EVENT LISTENER FOR THE BEGIN GAME BUTTON

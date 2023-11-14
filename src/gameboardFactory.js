@@ -1,6 +1,6 @@
 import { createShip } from "./shipFactory";
 import { updateGamePieces, setMessage, triggerHitMessage } from "./domFunctions";
-import { Player } from "./gameLogic";
+import { Player, Computer } from "./gameLogic";
 
 function createGameboard(owner) {
 
@@ -47,6 +47,10 @@ function createGameboard(owner) {
                 ship.hit();
                 if(Player.isTurn) {
                     triggerHitMessage();
+                }
+                if(Computer.isTurn) {
+                    Computer.prevLastHit = Computer.lastHit;
+                    Computer.lastHit = { y: ycoord, x: xcoord };
                 }
                 this.board[ycoord][xcoord].status = 'hit';
 
