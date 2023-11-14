@@ -1,4 +1,4 @@
-import { handleCellClick, Player, Computer } from "./gameLogic";
+import { handleCellClick, handlePlayerCellClick, Player, Computer } from "./gameLogic";
 
 function renderPlayerBoard() {
     const board = Player.gameboard.board;
@@ -16,6 +16,9 @@ function renderPlayerBoard() {
             }
             if(cellInfo.status === 'empty') {
                 cell.classList.add('empty');
+                cell.addEventListener('click', () => {
+                    handlePlayerCellClick(row, column);
+                });
             } else if(cellInfo.status === 'miss') {
                 cell.classList.add('miss');
             } else if(cellInfo.status === 'hit') {

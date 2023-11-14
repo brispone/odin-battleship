@@ -3,7 +3,10 @@ import { createGameboard } from "./gameboardFactory.js";
 
 const Player = {
     gameboard: createGameboard('player'),
-    isTurn: false
+    isTurn: false,
+    // currentlyPlacing initialized as false, but on game start will change to an object with two properties:
+    //      The ship type that is currently being placed, and also the current placement orientation (horitzontal or vertical)
+    currentlyPlacing: { ship: 'carrier', orientation: 'horizontal' }
 }
 
 const Computer = {
@@ -57,6 +60,38 @@ function handleCellClick(y,x) {
 
         // Set a short timeout to simulate the opponent thinking about their turn, then trigger computer move
         setTimeout(computerTakeTurn, 1000);
+    }
+}
+
+function handlePlayerCellClick(y,x) {
+    // Check to see if the player is currently placing game pieces
+    if(Player.currentlyPlacing) {
+        const placed = Player.gameboard.placeShip(Player.currentlyPlacing.ship, y, x, Player.currentlyPlacing.orientation);
+        if(placed) {
+            advancePlacement();
+            renderPlayerBoard();
+        }
+    }
+}
+
+function advancePlacement() { // Simple switch logic to advance which ship the player is currently placing at the start of a game
+    switch(Player.currentlyPlacing.ship) {
+        case 'carrier':
+            Player.currentlyPlacing.ship = 'battleship';
+            break;
+        case 'battleship':
+            Player.currentlyPlacing.ship = 'destroyer';
+            break;
+
+        case 'destroyer':
+            Player.currentlyPlacing.ship = 'submarine';
+            break;
+        case 'submarine':
+            Player.currentlyPlacing.ship = 'patrol';
+            break;
+        case 'patrol':
+            Player.currentlyPlacing = false;
+            break;
     }
 }
 
@@ -115,4 +150,4 @@ document.getElementById('new-game-button').addEventListener('click', ()=> {
     beginGame();
 });
 
-export { handleCellClick, Player, Computer };
+export { handleCellClick, handlePlayerCellClick, Player, Computer };
