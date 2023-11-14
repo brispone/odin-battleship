@@ -1,4 +1,4 @@
-import { renderPlayerBoard, renderComputerBoard, resetGamePieces, setMessage } from "./domFunctions";
+import { renderPlayerBoard, renderComputerBoard, resetGamePieces, setMessage, showPlacementPreview, removePlacementPreview } from "./domFunctions";
 import { createGameboard } from "./gameboardFactory.js";
 
 const Player = {
@@ -174,10 +174,20 @@ document.getElementById('new-game-button').addEventListener('click', ()=> {
 
 // Switch orientation of ship placement between horizontal and vertical
 document.addEventListener('keydown', (event) => {
+
     if(Player.currentlyPlacing && event.key === 'r') {
+        console.log(Player);
         if(Player.currentlyPlacing.orientation === 'horizontal') {
             Player.currentlyPlacing.orientation = 'vertical';
         } else Player.currentlyPlacing.orientation = 'horizontal';
+
+        removePlacementPreview();
+        const hoveredCell = document.querySelector('.cell:hover');
+        if(hoveredCell) {
+            const y = hoveredCell.dataset.row;
+            const x = hoveredCell.dataset.col;
+            showPlacementPreview(Number(y), Number(x));
+        }
     }
 });
 

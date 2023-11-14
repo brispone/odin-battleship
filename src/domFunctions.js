@@ -24,7 +24,7 @@ function renderPlayerBoard() {
                 });
                 cell.addEventListener('mouseover', () => {
                     if(Player.currentlyPlacing) {
-                        showPlacementPreview(cell, row, column);
+                        showPlacementPreview(row, column);
                     }
                 });
                 cell.addEventListener('mouseout', () => {
@@ -88,7 +88,7 @@ function resetGamePieces() {
     });
 }
 
-function showPlacementPreview(cell, y, x) {
+function showPlacementPreview(y, x) {
     const length = shipLength(Player.currentlyPlacing.ship);
     const orientation = Player.currentlyPlacing.orientation;
     let currentY = y;
@@ -134,4 +134,4 @@ function triggerHitMessage() {
     setMessage(messages[randomNumber]);
 }
 
-export { renderPlayerBoard, renderComputerBoard, updateGamePieces, resetGamePieces, setMessage, triggerHitMessage };
+export { renderPlayerBoard, renderComputerBoard, updateGamePieces, resetGamePieces, setMessage, triggerHitMessage, showPlacementPreview, removePlacementPreview };

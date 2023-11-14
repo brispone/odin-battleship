@@ -72,28 +72,24 @@ body {
     border: 1px dashed black;
 }
 
-/* Empty cell style */
 .empty {
     background-color: #fff;
 }
 
-/* Cell with a ship style */
 .ship {
-    background-color: #555; /* Dark gray */
-    color: #fff; /* White text */
+    background-color: #555;
+    color: #fff;
 }
 
-/* Cell with a miss style */
 .miss {
-    background-color: #3498db; /* Blue */
-    color: #fff; /* White text */
+    background-color: #3498db;
+    color: #fff;
 }
 
-/* Cell with a hit style */
 .hit {
-    background-color: #555; /* Dark gray */
-    color: #fff; /* White text */
-    outline: 2px solid #e74c3c; /* Red outline */
+    background-color: #555;
+    color: #fff;
+    outline: 2px solid #e74c3c;
 }
 
 #new-game-button {
@@ -102,19 +98,6 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
-/*
-.message-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    width: 25%;
-    height: 100px;
-    background-color: #f1f1f1;
-    margin-top: 20px;
-    border: 1px solid #ccc;
-}
-*/
 
 .placement-preview-valid {
     background-color: lightgreen;
@@ -131,16 +114,16 @@ body {
     text-align: center;
     width: 25%;
     height: 150px;
-    background-color: #1f1f1f; /* Dark background */
+    background-color: #1f1f1f; 
     margin-top: 20px;
     border: 2px solid #ccc;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
-    font-family: 'Courier New', monospace; /* Monospace font */
-    color: #00ff00; /* Green text */
-    letter-spacing: 2px; /* Spacing between letters */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-family: 'Courier New', monospace;
+    color: #00ff00;
+    letter-spacing: 2px;
   }
   
   #message-text {
-    padding: 10px; /* Padding inside the box */
+    padding: 10px;
   }
