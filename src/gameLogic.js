@@ -1,4 +1,4 @@
-import { renderPlayerBoard, renderComputerBoard, resetGamePieces } from "./domFunctions";
+import { renderPlayerBoard, renderComputerBoard, resetGamePieces, setMessage } from "./domFunctions";
 import { createGameboard } from "./gameboardFactory.js";
 
 const Player = {
@@ -39,6 +39,7 @@ function beginGame() {
     renderPlayerBoard();
     renderComputerBoard();
     resetGamePieces();
+    setMessage('Place your carrier on the board. You can press the R key to switch between horizontal and vertical placement.');
 }
 
 function handleCellClick(y,x) {
@@ -79,21 +80,26 @@ function advancePlacement() { // Simple switch logic to advance which ship the p
     switch(Player.currentlyPlacing.ship) {
         case 'carrier':
             Player.currentlyPlacing.ship = 'battleship';
+            setMessage('Place your battleship on the board. You can press the R key to switch between horizontal and vertical placement.');
             break;
         case 'battleship':
             Player.currentlyPlacing.ship = 'destroyer';
+            setMessage('Place your destroyer on the board. You can press the R key to switch between horizontal and vertical placement.');
             break;
 
         case 'destroyer':
             Player.currentlyPlacing.ship = 'submarine';
+            setMessage('Place your submarine on the board. You can press the R key to switch between horizontal and vertical placement.');
             break;
         case 'submarine':
             Player.currentlyPlacing.ship = 'patrol';
+            setMessage('Place your patrol boat on the board. You can press the R key to switch between horizontal and vertical placement.');
             break;
         case 'patrol':
             Player.currentlyPlacing = false;
             Player.allShipsPlaced = true;
             Player.isTurn = true;
+            setMessage('Click a coordinate on the enemy board to fire at that location. Good luck!');
             break;
     }
 }

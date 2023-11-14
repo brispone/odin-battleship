@@ -77,4 +77,9 @@ function resetGamePieces() {
     });
 }
 
-export { renderPlayerBoard, renderComputerBoard, updateGamePieces, resetGamePieces };
+function setMessage(message) {
+    const messageText = document.getElementById('message-text');
+    messageText.innerText = message;
+}
+
+export { renderPlayerBoard, renderComputerBoard, updateGamePieces, resetGamePieces, setMessage };

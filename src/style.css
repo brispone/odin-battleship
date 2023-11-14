@@ -106,3 +106,15 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
+
+.message-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 25%;
+    height: 100px;
+    background-color: #f1f1f1;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+}
