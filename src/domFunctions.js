@@ -93,16 +93,19 @@ function showPlacementPreview(cell, y, x) {
     const orientation = Player.currentlyPlacing.orientation;
     let currentY = y;
     let currentX = x;
-    if(Player.gameboard.checkCells(y, x, length, orientation)) {
-        //cell.classList.add('placement-preview-valid');
+    const validPlacement = Player.gameboard.checkCells(y, x, length, orientation);
+
         for(let i = 0; i < length; i++) {
             const currentCell = document.querySelector(`[data-row="${currentY}"][data-col="${currentX}"]`);
-            currentCell.classList.add('placement-preview-valid');
+            if(currentCell) {
+                if(validPlacement) {
+                    currentCell.classList.add('placement-preview-valid');
+                } else currentCell.classList.add('placement-preview-invalid');   
+            }
             if(orientation === 'horizontal') {
                 currentX++;
             } else currentY++;
         }
-    } else cell.classList.add('placement-preview-invalid');
 }
 
 function removePlacementPreview(cell) {
