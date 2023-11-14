@@ -6,7 +6,8 @@ const Player = {
     isTurn: false,
     // currentlyPlacing initialized as false, but on game start will change to an object with two properties:
     //      The ship type that is currently being placed, and also the current placement orientation (horitzontal or vertical)
-    currentlyPlacing: { ship: 'carrier', orientation: 'horizontal' }
+    currentlyPlacing: false,
+    allShipsPlaced: false
 }
 
 const Computer = {
@@ -29,11 +30,11 @@ function endGame() {
 }
 
 function beginGame() {
-    Player.isTurn = true;
+    Player.currentlyPlacing = { ship: 'carrier', orientation: 'horizontal' },
+    Player.allShipsPlaced = false,
     Computer.isTurn = false;
     Player.gameboard = createGameboard('player');
     Computer.gameboard = createGameboard('computer');
-    placeShipsRandomly(Player);
     placeShipsRandomly(Computer);
     renderPlayerBoard();
     renderComputerBoard();
@@ -91,6 +92,8 @@ function advancePlacement() { // Simple switch logic to advance which ship the p
             break;
         case 'patrol':
             Player.currentlyPlacing = false;
+            Player.allShipsPlaced = true;
+            Player.isTurn = true;
             break;
     }
 }
@@ -148,6 +151,15 @@ function placeShipsRandomly(player) {
 
 document.getElementById('new-game-button').addEventListener('click', ()=> {
     beginGame();
+});
+
+// Switch orientation of ship placement between horizontal and vertical
+document.addEventListener('keydown', (event) => {
+    if(Player.currentlyPlacing && event.key === 'r') {
+        if(Player.currentlyPlacing.orientation === 'horizontal') {
+            Player.currentlyPlacing.orientation = 'vertical';
+        } else Player.currentlyPlacing.orientation = 'horizontal';
+    }
 });
 
 export { handleCellClick, handlePlayerCellClick, Player, Computer };
